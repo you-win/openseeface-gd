@@ -50,6 +50,19 @@ func _on_gui_toggle_set(toggle_name: String, view_name: String) -> void:
 		if toggle_name != child.name:
 			child.toggle_button.pressed = false
 
+# Callback to update the text value of a an assioated `LineEdit` objected
+# contained within a `MarginContainer`
+# value: int - The value returned by `Range.change_value)
+# text_box: MarginContainer - The MarginContainer that holds the LineEdit
+#	object to update
+func _on_hslider_changed(value: int, text_box: MarginContainer) -> void:
+	text_box.line_edit.text = str(float(value)/1000)
+
+func _on_hslider_text_changed(text: String, slider: HSlider, text_box: LineEdit) -> void:
+	slider.value = int(text)
+	# Stop cursor from resetting to start of line
+	text_box.set_cursor_position(text.length())
+
 ###############################################################################
 # Private functions                                                           #
 ###############################################################################
@@ -106,6 +119,18 @@ func _create_element(element_type: int, element_name: String, element_label_text
 	result.label_text = element_label_text
 	
 	return result
+
+func _create_hslider(hslider_name: String, text_box: MarginContainer, value: int) -> HSlider:
+	var new_hslider: HSlider = HSlider.new()
+	new_hslider.name = "hslider_name"
+	new_hslider.value = value
+	new_hslider.set_ticks(3)
+	new_hslider.min_value = -1000
+	new_hslider.max_value = 1000
+	new_hslider.connect("value_changed", self, "_on_hslider_changed", [text_box])
+	text_box.line_edit.connect("text_changed", self, "_on_hslider_text_changed", [new_hslider, text_box.line_edit])
+
+	return new_hslider
 
 ###############################################################################
 # Public functions                                                            #
