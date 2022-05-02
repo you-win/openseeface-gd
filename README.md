@@ -1,8 +1,7 @@
 # openseeface-gd
 A Godot 3.x plugin for bringing [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace) tracking data into Godot.
 
-## IMPORTANT
-If you are looking for the VTuber application that was previously named `openseeface-gd`, that has been moved to [puppeteer](https://github.com/virtual-puppet-project/puppeteer) as to not conflict with [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace).
+## IMPORTANT If you are looking for the VTuber application that was previously named `openseeface-gd`, that has been moved to [puppeteer](https://github.com/virtual-puppet-project/puppeteer) as to not conflict with [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace).
 
 ## WIP
 Still extracting the face tracker code from `puppeteer`.
