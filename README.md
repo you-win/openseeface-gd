@@ -3,8 +3,13 @@ A Godot 3.x plugin for bringing [OpenSeeFace](https://github.com/emilianavt/Open
 
 ## IMPORTANT If you are looking for the VTuber application that was previously named `openseeface-gd`, that has been moved to [puppeteer](https://github.com/virtual-puppet-project/puppeteer) as to not conflict with [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace).
 
-## WIP
-Still extracting the face tracker code from `puppeteer`.
+## Usage as a Virtual Puppet Project extension (Windows)
+1. Clone this repo
+2. Download the latest [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace) release
+3. Find the binary folder (the folder that contains the compiled binary) and the models folder (called `models`)
+4. Rename the binary folder to `OpenSeeFace`
+5. Copy both folders to to `open_see_face/OpenSeeFaceFolder/<your folders here>`
+6. The entire `open_see_face` folder can now be used as a Virtual Puppet Project extension
 
 ## FAQ
 
