@@ -22,81 +22,81 @@ var python_path := ""
 var osf_path := ""
 
 @export
-var ip := ""
+var ip := "127.0.0.1"
 @export
-var port := ""
+var port := "11573"
 @export
-var list_cameras := ""
+var list_cameras := "0"
 @export
 var list_dcaps := ""
 @export
-var width := ""
+var width := "640"
 @export
-var height := ""
+var height := "360"
 @export
 var dcap := ""
 @export
-var blackmagic := ""
+var blackmagic := "0"
 @export
-var fps := ""
+var fps := "24"
 @export
-var capture := ""
+var capture := "0"
 @export
 var mirror_input := false
 @export
-var max_threads := ""
+var max_threads := "1"
 @export
 var threshold := ""
 @export
-var detection_threshold := ""
+var detection_threshold := "0.6"
 @export
-var visualize := ""
+var visualize := "0"
 @export
-var pnp_points := ""
+var pnp_points := "0"
 @export
-var silent := ""
+var silent := "0"
 @export
-var faces := ""
+var faces := "1"
 @export
-var scan_retinaface := ""
+var scan_retinaface := "0"
 @export
-var scan_every := ""
+var scan_every := "3"
 @export
-var discard_after := ""
+var discard_after := "10"
 @export
-var max_feature_updates := ""
+var max_feature_updates := "900"
 @export
-var no_3d_adapt := ""
+var no_3d_adapt := "1"
 @export
-var try_hard := ""
+var try_hard := "0"
 @export
 var video_out := ""
 @export
-var video_scale := ""
+var video_scale := "1"
 @export
-var video_fps := ""
+var video_fps := "24"
 @export
-var raw_rgb := ""
+var raw_rgb := "0"
 @export
 var log_data := ""
 @export
 var log_output := ""
 @export
-var model := ""
+var model := "3"
 @export
 var model_dir := ""
 @export
-var gaze_tracking := ""
+var gaze_tracking := "1"
 @export
-var face_id_offset := ""
+var face_id_offset := "0"
 @export
-var repeat_video := ""
+var repeat_video := "0"
 @export
 var dump_points := ""
 @export
-var benchmark := ""
+var benchmark := "0"
 @export
-var use_dshowcapture := ""
+var use_dshowcapture := "1"
 @export
 var blackmagic_options := ""
 @export
