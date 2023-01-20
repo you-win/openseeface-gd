@@ -1,6 +1,8 @@
 # openseeface-gd
 A Godot 4 project for running [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace) via a GUI.
 
+STILL WIP
+
 ## IMPORTANT If you are looking for the VTuber application that was previously named `openseeface-gd`, that has been moved to [puppeteer](https://github.com/virtual-puppet-project/puppeteer) as to not conflict with [OpenSeeFace](https://github.com/emilianavt/OpenSeeFace).
 
 ## FAQ
