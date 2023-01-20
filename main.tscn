@@ -1,0 +1,133 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr0v00f6koeie"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_hemfs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pm8h"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="Main" type="CanvasLayer"]
+script = ExtResource("1_hemfs")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pm8h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Run" type="Button" parent="PanelContainer/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Run"
+
+[node name="RunType" type="OptionButton" parent="PanelContainer/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Status" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true
+
+[node name="BinaryOptions" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/BinaryOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/BinaryOptions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OpenSeeFace Binary"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/BinaryOptions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BinaryPath" type="LineEdit" parent="PanelContainer/VBoxContainer/BinaryOptions/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Absolute path to the OpenSeeFace binary"
+
+[node name="ChooseBinary" type="Button" parent="PanelContainer/VBoxContainer/BinaryOptions/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select"
+
+[node name="PythonOptions" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PythonOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Python Binary"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PythonPath" type="LineEdit" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Absolute path or PATH name"
+
+[node name="ChoosePython" type="Button" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PythonOptions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OpenSeeFace Folder"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OsfPath" type="LineEdit" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Absolute path to the OpenSeeFace folder"
+
+[node name="ChooseOsf" type="Button" parent="PanelContainer/VBoxContainer/PythonOptions/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select"
+
+[node name="GeneralOptions" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OsfOptions" type="VBoxContainer" parent="PanelContainer/VBoxContainer/GeneralOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
