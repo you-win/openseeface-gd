@@ -291,11 +291,13 @@ class OsfOption extends HBoxContainer:
 	func option_name() -> String:
 		return _label.text
 	
-	func option_value() -> String:
+	func option_value() -> Variant:
 		return _element.text if _element is LineEdit else _element.button_pressed
 
 var _config: Config = null
 var _is_windows := false
+var _use_binary := false
+var _tracker_pid := -1
 
 @onready
 var _status := %Status as RichTextLabel
@@ -324,15 +326,51 @@ func _ready() -> void:
 	
 	var run_button := %Run as Button
 	run_button.pressed.connect(func() -> void:
-		var run_options := []
-		for child in _osf_options.get_children():
-			run_options.push_back(OSF_OPTIONS[child.option_name()].flag)
-			run_options.push_back(child.option_value())
-		
 		var exe_path := ""
-		# TODO stub, check which run type is selected and construct the path
+		var run_options := []
 		
-		OS.create_process(exe_path, run_options, true)
+		if _use_binary:
+			if _config.binary_path.is_empty():
+				self._update_status("No OpenSeeFace binary configured")
+				return
+			
+			exe_path = _config.binary_path
+		else:
+			if _config.python_path.is_empty():
+				self._update_status("No Python binary configured")
+				return
+			elif _config.osf_path.is_empty():
+				self._update_status("No OpenSeeFace folder configured")
+				return
+			
+			exe_path = _config.python_path
+			run_options.push_back("%s/facetracker.py" % _config.osf_path)
+		
+		if not FileAccess.file_exists(exe_path):
+			self._update_status("%s does not exist" % exe_path)
+			return
+		if run_options.front() != null and not FileAccess.file_exists(run_options.front()):
+			self._update_status("%s does not exist" % run_options.front())
+			return
+		
+		for child in _osf_options.get_children():
+			var val = child.option_value()
+			match typeof(val):
+				TYPE_STRING:
+					if val.is_empty():
+						continue
+				TYPE_BOOL:
+					if not val:
+						continue
+			
+			run_options.push_back(OSF_OPTIONS[child.option_name()].flag)
+			run_options.push_back(val)
+		
+		var pid := OS.create_process(exe_path, run_options, true)
+		if pid < 0:
+			self._update_status("Unable to start tracker")
+		else:
+			_tracker_pid = pid
 	)
 	
 	var binary_options := %BinaryOptions as VBoxContainer
@@ -346,30 +384,40 @@ func _ready() -> void:
 			Config.RunTypes.BINARY:
 				python_options.hide()
 				binary_options.show()
+				_use_binary = true
 			Config.RunTypes.PYTHON:
 				binary_options.hide()
 				python_options.show()
+				_use_binary = false
 	)
+	run_type.select(0)
+	run_type.item_selected.emit(0)
 	
 	%ChooseBinary.pressed.connect(func() -> void:
 		var popup := _show_file_dialog()
 		popup.file_selected.connect(func(path: String) -> void:
 			_binary_path.text = path
+			_config.binary_path = path
 		)
 	)
+	_binary_path.text = _config.binary_path
 	
 	%ChoosePython.pressed.connect(func() -> void:
 		var popup := _show_file_dialog()
 		popup.file_selected.connect(func(path: String) -> void:
 			_python_path.text = path
+			_config.python_path = path
 		)
 	)
+	_python_path.text = _config.python_path
 	%ChooseOsf.pressed.connect(func() -> void:
 		var popup := _show_file_dialog(FileDialog.FILE_MODE_OPEN_DIR)
 		popup.dir_selected.connect(func(path: String) -> void:
 			_osf_path.text = path
+			_config.osf_path = path
 		)
 	)
+	_osf_path.text = _config.osf_path
 	
 	for data in OSF_OPTIONS.values():
 		if data.get("windows_only", false) and not _is_windows:
@@ -389,6 +437,11 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_write_config(_config)
+	
+	# Technically this should be -1, but PID 0 is usually the system root process
+	# On Linux, I'm pretty sure all PIDs must be greater than 1000
+	if _tracker_pid > 0:
+		OS.kill(_tracker_pid)
 
 #-----------------------------------------------------------------------------#
 # Private functions
